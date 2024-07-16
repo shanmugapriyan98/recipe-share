@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Lusitana } from "next/font/google";
+import Header from "./header";
+import { Roboto } from 'next/font/google'
 import "./globals.css";
-
-const inter = Lusitana({
-  subsets: ["latin"],
-  weight: ["400", "700"]
-});
+ 
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+})
+ 
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +21,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${roboto.className} antialiased bg-blue-50 min-h-screen`}>
+        <Header />
+        <main className="p-6 min-h-[calc(100vh-64px)]">
+          <div className="container mx-auto p-6 bg-white rounded-md shadow-md">
+            {children}
+          </div>
+        </main>
+      </body>
     </html>
   );
 }

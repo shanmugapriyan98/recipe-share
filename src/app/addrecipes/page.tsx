@@ -1,35 +1,19 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 'use client';
-import PhotoIcon from "@heroicons/react/24/solid/PhotoIcon"
 import { FormEvent } from "react"
 
 export default function Page() {
+  
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
  
     const formData = new FormData(event.currentTarget)
-    const response = await fetch('http://localhost:8000/recipe/', {
+    const response = await fetch('http://3.234.195.203:8000/recipe/', {
       method: 'POST',
       body: formData,
-    })
- 
-    // Handle response if necessary
+    }) 
     const data = await response.json()
-    // ...
   }
+
   return (
     <div className="px-6 py-6">
       <form onSubmit={onSubmit}>

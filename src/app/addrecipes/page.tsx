@@ -1,33 +1,55 @@
 'use client';
-import { FormEvent } from "react"
+import { FormEvent, useRef, useState } from "react"
+import SuccessModal from "../successModal";
 
 export default function Page() {
-  
+
+  const formref = useRef<HTMLFormElement>(null)
+  const [successOpen, setSuccessOpen] = useState(false);
+  const [errorOpen, setErrorOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    
     event.preventDefault()
  
     const formData = new FormData(event.currentTarget)
-    const response = await fetch('http://3.234.195.203:8000/recipe/', {
-      method: 'POST',
-      body: formData,
-    }) 
-    const data = await response.json()
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_DJANGO_API_ENDPOINT}/recipe/`, {
+        method: 'POST',
+        body: formData,
+      }) 
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const data = await response.json()
+      setSuccessOpen(true);
+      if(formref.current) formref.current.reset();
+
+    } catch (error:any) {  
+      setErrorMessage(error.message);
+      console.error(errorMessage);
+      setErrorOpen(true);
+    }
   }
 
   return (
     <div className="px-6 py-6">
-      <form onSubmit={onSubmit}>
+      <form ref={formref} onSubmit={onSubmit}>
         <div className="space-y-12">
           <div className="border-b border-gray-300 pb-12">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Add your recipe</h2>
-          <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">This recipe will be displayed with all your instructions.</p>
+          <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">
+            Add your recipe with clear instructions. You can view this recipe once you submit this form. 
+          </p>
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-4">
                 <label
                   htmlFor="name"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Name of the Recipe
+                  <strong>Name of the Recipe</strong>
                 </label>
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -48,7 +70,7 @@ export default function Page() {
                   htmlFor="info"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Recipe Instructions
+                  <strong>Recipe Instructions</strong>
                 </label>
                 <div className="mt-2">
                   <textarea
@@ -117,6 +139,8 @@ export default function Page() {
           </button>
         </div>
       </form>
+
+      { successOpen && <SuccessModal></SuccessModal>}
     </div>
   );
 }

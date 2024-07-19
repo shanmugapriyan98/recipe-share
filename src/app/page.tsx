@@ -10,8 +10,8 @@ export default function Home() {
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
           {/* Add Hero Images Here */}
-          <Image
-            src="chef.jpeg"
+          <img
+            src="/chef.jpeg"
             width={700}
             height={650}
             className="hidden md:block"

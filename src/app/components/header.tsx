@@ -2,6 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Header() {
+
+  const links = [
+    {id:1, href:"/addrecipes", message:"Add Recipes"},
+    {id:2, href:"/viewrecipes", message:"View Recipes"},
+    {id:3, href:"/contactus", message:"Contact Us"},
+  ]
+
   return (
     <header>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
@@ -11,9 +18,9 @@ export default function Header() {
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Recipe Share</span>
           </a>
           <div className="hidden lg:flex lg:items-center lg:space-x-8">
-            <Link href="/addrecipes" className="text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-white"><strong>Add Recipes</strong></Link>
-            <Link href="/viewrecipes" className="text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-white"><strong>View Recipes</strong></Link>
-            <Link href="/contactus" className="text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-white"><strong>Contact Us</strong></Link>
+            {links.map((link) => (
+               <Link key={link.id} href={link.href} className="text-gray-700 hover:text-primary-700 dark:text-gray-400 dark:hover:text-white"><strong>{link.message}</strong></Link>
+            ))}
           </div>
           <button data-collapse-toggle="mobile-menu-2" type="button" className="lg:hidden inline-flex items-center p-2 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
             <span className="sr-only">Open main menu</span>
@@ -23,15 +30,11 @@ export default function Header() {
         </div>
         <div className="lg:hidden" id="mobile-menu-2">
           <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-            <li>
-              <Link href="/addrecipes" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700">Add Recipes</Link>
-            </li>
-            <li>
-              <Link href="/viewrecipes" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700">View Recipes</Link>
-            </li>
-            <li>
-              <Link href="/contactus" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700">Contact Us</Link>
-            </li>
+            {links.map((link) => (
+               <li key={link.id}>
+                <Link href={link.href} className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-700">{link.message}</Link>
+               </li>
+            ))}
           </ul>
         </div>
       </nav>

@@ -1,13 +1,14 @@
 'use client';
 import { FormEvent, useRef, useState } from "react"
-import SuccessModal from "../successModal";
+import SuccessModal from "../components/successModal";
 
 export default function Page() {
 
   const formref = useRef<HTMLFormElement>(null)
   const [successOpen, setSuccessOpen] = useState(false);
-  const [errorOpen, setErrorOpen] = useState(false);
+  // const [errorOpen, setErrorOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const modalData = {page: "Add your recipe", message: "Your recipe added succesfully!"}
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     
@@ -30,7 +31,7 @@ export default function Page() {
     } catch (error:any) {  
       setErrorMessage(error.message);
       console.error(errorMessage);
-      setErrorOpen(true);
+      // setErrorOpen(true);
     }
   }
 
@@ -140,7 +141,7 @@ export default function Page() {
         </div>
       </form>
 
-      { successOpen && <SuccessModal></SuccessModal>}
+      { successOpen && <SuccessModal data={modalData}></SuccessModal>}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Header from "./header";
+import Header from "./components/header";
 import { Roboto } from 'next/font/google'
 import "./globals.css";
  

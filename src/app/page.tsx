@@ -1,14 +1,12 @@
 export default function Home() {
   return (
     <main className="relative flex min-h-screen flex-col p-6 bg-gray-100">
-      {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
           src="https://kangacook.com/assets/landing-page-bg-D3sH5q7Y.jpg"
           className="w-full h-full object-cover"
           alt="Background"
         />
-        {/* Dark overlay */}
       </div>
 
       {/* Content */}
@@ -17,7 +15,7 @@ export default function Home() {
           <img
             src="https://kangacook.com/assets/kangacook_logo_en-C6XaWo8m.svg"
             className="w-full h-auto max-h-96 rounded-lg shadow-lg object-cover"
-            alt="Flowbite Logo"
+            alt="Kangacook Logo"
           />
         </div>
         <div className="flex flex-col justify-center gap-6 rounded-lg bg-white bg-opacity-80 px-6 py-10 md:w-1/2 md:px-20 shadow-lg backdrop-blur-lg">

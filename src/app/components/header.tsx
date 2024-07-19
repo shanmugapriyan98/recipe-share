@@ -14,7 +14,7 @@ export default function Header() {
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div className="flex justify-between items-center mx-auto max-w-screen-xl">
           <a href="https://kangacook.com" className="flex items-center">
-            <Image src="https://kangacook.com/assets/kangacook_logo_en-C6XaWo8m.svg" width={100} height={100} className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
+            <Image src="https://kangacook.com/assets/kangacook_logo_en-C6XaWo8m.svg" width={100} height={100} className="mr-3 h-6 sm:h-9" alt="Kangacook Logo" />
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Recipe Share</span>
           </a>
           <div className="hidden lg:flex lg:items-center lg:space-x-8">
